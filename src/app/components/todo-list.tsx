@@ -2,12 +2,14 @@
 
 import { useGetTodoQuery } from "@/hooks/queries/getTodoQuery";
 import { Todo } from "@/types";
-import { useQueryClient } from "@tanstack/react-query";
 import TodoItem from "./todo-item";
+import { useState } from "react";
+import { usePostTodoMutation } from "@/hooks/mutation/postTodoMutaition";
 
 const TodoList = () => {
+  const [newTodo, setNewTodo] = useState<string>("");
   const { data, isPending, isError } = useGetTodoQuery();
-  console.log(data);
+  const { mutate: postMutation } = usePostTodoMutation();
   if (isPending) {
     return <div>데이터를 로딩 중입니다.</div>;
   }
@@ -17,6 +19,18 @@ const TodoList = () => {
   return (
     <div>
       <div> 투두 리스트 </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          postMutation({ title: newTodo });
+          setNewTodo("");
+        }}
+      >
+        <div>새로 할일을 작성해보세요!</div>
+        <input value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
+        <button type="submit">작성하기</button>
+      </form>
+
       {data.map((todo: Todo) => {
         return (
           <div key={todo.id}>
