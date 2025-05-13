@@ -34,7 +34,7 @@ const TodoList = () => {
       {data.map((todo: Todo) => {
         return (
           <div key={todo.id}>
-            <TodoItem title={todo.title} />
+            <TodoItem title={todo.title} id={todo.id} />
           </div>
         );
       })}
