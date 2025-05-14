@@ -16,6 +16,8 @@ const TodoList = () => {
   if (isError) {
     return <div>데이터 로딩에 실패했습니다.</div>;
   }
+  const doneTodos = data.filter((todo: Todo) => todo.done);
+  const todoTodos = data.filter((todo: Todo) => !todo.done);
   return (
     <div>
       <div> 투두 리스트 </div>
@@ -31,10 +33,20 @@ const TodoList = () => {
         <button type="submit">작성하기</button>
       </form>
 
-      {data.map((todo: Todo) => {
+      <div>진행중인 TODOS</div>
+      {todoTodos.map((todo: Todo) => {
         return (
           <div key={todo.id}>
-            <TodoItem title={todo.title} id={todo.id} />
+            <TodoItem title={todo.title} id={todo.id} done={todo.done} />
+          </div>
+        );
+      })}
+
+      <div>완료된 TODOS</div>
+      {doneTodos.map((todo: Todo) => {
+        return (
+          <div key={todo.id}>
+            <TodoItem title={todo.title} id={todo.id} done={todo.done} />
           </div>
         );
       })}
