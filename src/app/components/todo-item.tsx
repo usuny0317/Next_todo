@@ -1,10 +1,20 @@
 import { useDeleteTodoMutation } from "@/hooks/mutation/deleteTodoMutation";
+import { useDoneTodoMutation } from "@/hooks/mutation/doneTodoMutation";
 import { useUpdateTodoMutation } from "@/hooks/mutation/updateTodoMutation";
 import { useState } from "react";
 
-const TodoItem = ({ title, id }: { title: string; id: string }) => {
+const TodoItem = ({
+  title,
+  id,
+  done,
+}: {
+  title: string;
+  id: string;
+  done: boolean;
+}) => {
   const { mutate: deleteMutate } = useDeleteTodoMutation();
   const { mutate: updateMutate } = useUpdateTodoMutation();
+  const { mutate: doneMutate } = useDoneTodoMutation();
 
   const [isUpdate, setIsUpdate] = useState(false);
   const [changeTitle, setChangeTitle] = useState("");
@@ -15,11 +25,15 @@ const TodoItem = ({ title, id }: { title: string; id: string }) => {
   const handleUpdate = () => {
     setIsUpdate(true);
   };
+  const handleSuccess = () => {
+    doneMutate({ id, done });
+  };
   return (
     <div>
       <p>{title}</p>
       <button onClick={() => handleUpdate()}>수정</button>
       <button onClick={() => handleDelete()}>삭제</button>
+      <button onClick={() => handleSuccess()}>{done ? "취소" : "완료"}</button>
       {isUpdate ? (
         <div>
           <input
