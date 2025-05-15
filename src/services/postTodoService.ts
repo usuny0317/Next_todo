@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants";
+import { API_URL, ERROR } from "@/constants";
 
 export const postTodoService = async ({ title }: { title: string }) => {
   const response = await fetch(API_URL, {
@@ -12,6 +12,6 @@ export const postTodoService = async ({ title }: { title: string }) => {
     }),
   });
   if (!response.ok) {
-    throw new Error("데이터를 저장하지 못했습니다.");
+    throw new Error(ERROR.POST);
   }
 };

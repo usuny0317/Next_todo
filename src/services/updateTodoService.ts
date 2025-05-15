@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants";
+import { API_URL, ERROR } from "@/constants";
 
 export const updateTodoService = async ({
   id,
@@ -16,4 +16,7 @@ export const updateTodoService = async ({
       title: title,
     }),
   });
+  if (!response.ok) {
+    throw new Error(ERROR.UPDATE);
+  }
 };

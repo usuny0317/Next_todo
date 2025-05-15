@@ -1,3 +1,4 @@
+import { QUERY_KEY } from "@/constants";
 import { updateTodoService } from "@/services/updateTodoService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -7,7 +8,7 @@ export const useUpdateTodoMutation = () => {
     mutationFn: updateTodoService,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["TodoList"],
+        queryKey: [QUERY_KEY],
       });
     },
   });
