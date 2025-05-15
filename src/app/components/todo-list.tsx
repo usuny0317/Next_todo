@@ -19,37 +19,53 @@ const TodoList = () => {
   const doneTodos = data.filter((todo: Todo) => todo.done);
   const todoTodos = data.filter((todo: Todo) => !todo.done);
   return (
-    <div>
-      <div> 투두 리스트 </div>
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow space-y-6">
+      <h1 className="text-2xl font-bold text-center">투두 리스트</h1>
       <form
+        className="w-full flex flex-col sm:flex-row gap-2"
         onSubmit={(e) => {
           e.preventDefault();
           postMutation({ title: newTodo });
           setNewTodo("");
         }}
       >
-        <div>새로 할일을 작성해보세요!</div>
-        <input value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
-        <button type="submit">작성하기</button>
+        <input
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          className="flex-1 border border-gray-300 rounded px-3 py-2"
+          placeholder="추가로 할 일을 입력하세요"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap"
+        >
+          작성하기
+        </button>
       </form>
 
-      <div>진행중인 TODOS</div>
-      {todoTodos.map((todo: Todo) => {
-        return (
-          <div key={todo.id}>
-            <TodoItem title={todo.title} id={todo.id} done={todo.done} />
-          </div>
-        );
-      })}
-
-      <div>완료된 TODOS</div>
-      {doneTodos.map((todo: Todo) => {
-        return (
-          <div key={todo.id}>
-            <TodoItem title={todo.title} id={todo.id} done={todo.done} />
-          </div>
-        );
-      })}
+      <section>
+        <h2 className="text-lg font-semibold">🔛 진행중인 TODOS</h2>
+        <div className="space-y-2">
+          {todoTodos.length === 0 && (
+            <div className="text-sm text-gray-500">할 일이 없습니다.</div>
+          )}
+          {todoTodos.map((todo: Todo) => (
+            <TodoItem key={todo.id} {...todo} />
+          ))}
+        </div>
+      </section>
+      <div className="my-6 border-t border-gray-300" />
+      <section>
+        <h2 className="text-lg font-semibold">✔️ 완료된 TODOS</h2>
+        <div className="space-y-2">
+          {doneTodos.length === 0 && (
+            <div className="text-sm text-gray-500">완료한 일이 없습니다.</div>
+          )}
+          {doneTodos.map((todo: Todo) => (
+            <TodoItem key={todo.id} {...todo} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
