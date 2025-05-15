@@ -29,32 +29,36 @@ const TodoItem = ({
     doneMutate({ id, done });
   };
   return (
-    <div className="flex items-center justify-between bg-white p-4 mb-3 rounded shadow-md">
-      <div className="flex items-center space-x-2">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white p-4 mb-3 rounded shadow-md w-full gap-2 sm:gap-0">
+      <div className="flex items-center gap-2 flex-1 min-w-0">
         <input
           type="checkbox"
           checked={done}
           onChange={handleSuccess}
-          className="w-5 h-5 cursor-pointer"
+          className="w-5 h-5 cursor-pointer shrink-0"
         />
         {isUpdate ? (
           <input
-            className="border px-2 py-1 rounded"
+            className="border px-2 py-1 rounded w-full"
             value={changeTitle}
             onChange={(e) => setChangeTitle(e.target.value)}
           />
         ) : (
-          <p className={`text-lg ${done ? "line-through text-gray-500" : ""}`}>
+          <p
+            className={`text-base sm:text-lg truncate ${
+              done ? "line-through text-gray-500" : ""
+            }`}
+          >
             {title}
           </p>
         )}
       </div>
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-center gap-2 shrink-0 w-full sm:w-auto">
         {isUpdate ? (
           <>
             <button
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:underline whitespace-nowrap"
               onClick={() => {
                 updateMutate({ id, title: changeTitle });
                 setIsUpdate(false);
@@ -64,7 +68,7 @@ const TodoItem = ({
               수정완료
             </button>
             <button
-              className="text-red-500 hover:underline"
+              className="text-red-500 hover:underline whitespace-nowrap"
               onClick={() => {
                 setIsUpdate(false);
                 setChangeTitle("");
@@ -76,13 +80,13 @@ const TodoItem = ({
         ) : (
           <>
             <button
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 hover:underline whitespace-nowrap"
               onClick={handleUpdate}
             >
               수정
             </button>
             <button
-              className="text-red-500 hover:underline"
+              className="text-red-500 hover:underline whitespace-nowrap"
               onClick={handleDelete}
             >
               삭제
