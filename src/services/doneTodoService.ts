@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants";
+import { API_URL, ERROR } from "@/constants";
 
 export const doneTodoService = async ({
   id,
@@ -16,4 +16,8 @@ export const doneTodoService = async ({
       done: !done,
     }),
   });
+
+  if (!response.ok) {
+    throw new Error(ERROR.DONE);
+  }
 };
