@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:3000/todos";
+export const API_URL = "https://spectrum-butternut-tax.glitch.me/todos";
 export const ERROR = {
   POST: "데이터를 저장하지 못했습니다.",
   GET: "데이터를 불러오지 못했습니다.",
