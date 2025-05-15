@@ -2,12 +2,12 @@
   "todos": [
     {
       "id": "1",
-      "title": "첫 번째 할 일",
+      "title": "이력서 수정하기",
       "completed": false
     },
     {
       "id": "6e88",
-      "title": "바보",
+      "title": "배포하기",
       "done": false
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "id": "4dd9",
-      "title": "가나다",
+      "title": "ㅁㄴㅇㄹㄹ",
       "done": true
     },
     {

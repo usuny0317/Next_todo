@@ -17,7 +17,7 @@ const TodoItem = ({
   const { mutate: doneMutate } = useDoneTodoMutation();
 
   const [isUpdate, setIsUpdate] = useState(false);
-  const [changeTitle, setChangeTitle] = useState("");
+  const [changeTitle, setChangeTitle] = useState(title);
 
   const handleDelete = () => {
     deleteMutate({ id });
@@ -35,7 +35,7 @@ const TodoItem = ({
           type="checkbox"
           checked={done}
           onChange={handleSuccess}
-          className="w-5 h-5"
+          className="w-5 h-5 cursor-pointer"
         />
         {isUpdate ? (
           <input
@@ -54,7 +54,7 @@ const TodoItem = ({
         {isUpdate ? (
           <>
             <button
-              className="text-green-500 hover:underline"
+              className="text-blue-500 hover:underline"
               onClick={() => {
                 updateMutate({ id, title: changeTitle });
                 setIsUpdate(false);
@@ -64,7 +64,7 @@ const TodoItem = ({
               수정완료
             </button>
             <button
-              className="text-gray-500 hover:underline"
+              className="text-red-500 hover:underline"
               onClick={() => {
                 setIsUpdate(false);
                 setChangeTitle("");

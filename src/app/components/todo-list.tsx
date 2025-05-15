@@ -22,7 +22,7 @@ const TodoList = () => {
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow space-y-6">
       <h1 className="text-2xl font-bold text-center">투두 리스트</h1>
       <form
-        className="w-full flex justify-center"
+        className="w-full flex flex-col sm:flex-row gap-2"
         onSubmit={(e) => {
           e.preventDefault();
           postMutation({ title: newTodo });
@@ -33,18 +33,18 @@ const TodoList = () => {
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           className="flex-1 border border-gray-300 rounded px-3 py-2"
-          placeholder="할 일을 입력하세요"
+          placeholder="추가로 할 일을 입력하세요"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 whitespace-nowrap"
         >
           작성하기
         </button>
       </form>
 
       <section>
-        <h2 className="text-lg font-semibold">🕐 진행중인 TODOS</h2>
+        <h2 className="text-lg font-semibold">🔛 진행중인 TODOS</h2>
         <div className="space-y-2">
           {todoTodos.length === 0 && (
             <div className="text-sm text-gray-500">할 일이 없습니다.</div>
